@@ -1,0 +1,73 @@
+name: Node.js CI
+
+on:
+    pull_request:
+        branches: 
+        - main
+        types:
+        - closed
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Check current directory
+        run: pwd
+
+      - name: List root directory
+        run: ls -la
+
+      - name: List workflow directory
+        run: ls -la ./.github/workflows
+
+      - name: List bb directory
+        run: ls -la ./.github/workflows/bb
+
+      - name: List bulletin-board-app directory
+        run: ls -la ./.github/workflows/bb/bulletin-board-app
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./.github/workflows/bb/bulletin-board-app
+
+      - name: Run tests
+        run: npm test
+        working-directory: ./.github/workflows/bb/bulletin-board-app
+# jobs:
+#   test:
+#     runs-on: ubuntu-latest
+
+#     strategy:
+#       matrix:
+#         node-version: [14.x, 16.x, 18.x]
+
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v2
+
+#       - name: Set up Node.js
+#         uses: actions/setup-node@v2
+#         with:
+#           node-version: ${{ matrix.node-version }}
+
+#       - name: Install dependencies
+#         run: npm install
+#         working-directory: ./bb/bulletin-board-app/
+
+#       - name: Run tests
+#         run: npm test
+#         working-directory: ./bb/bulletin-board-app/
+
