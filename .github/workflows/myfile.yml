@@ -1,4 +1,4 @@
-# Andrew
+
 name: Publish Docker image
 
 on:
@@ -9,7 +9,7 @@ on:
       - closed
 
 env:
-  REPO_NAME: andrewjayasinghe/bb
+  REPO_NAME: vukanim/itm350-vukanim-bb
 
 jobs:
   if_merged:
